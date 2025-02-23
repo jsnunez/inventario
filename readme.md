@@ -7,6 +7,9 @@ Este es un proyecto de una API RESTful para gestionar productos, desarrollada co
 - `PUT` para actualizar un producto existente `https://inventario-production-fa75.up.railway.app/api/productos/${id}`
 - `DELETE` para eliminar un producto `https://inventario-production-fa75.up.railway.app/api/productos/${id}`
 
+nota: {id} se debe cambiar por el numero del producto
+
+
 ## Tecnologías utilizadas
 
 - **Node.js**: Entorno de ejecución para JavaScript del lado del servidor.
