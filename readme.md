@@ -17,7 +17,9 @@ nota: {id} se debe cambiar por el numero del producto
 - **Node.js**: Entorno de ejecución para JavaScript del lado del servidor.
 - **Express.js**: Framework para Node.js que facilita la creación de aplicaciones web y APIs.
 - **MySQL**: Sistema de gestión de bases de datos relacional para almacenar los datos.
-- **Insomnia** (opcional): Herramienta para probar las peticiones de la API.
+- **HTML**: Lenguaje de marcado para estructurar el contenido web.
+- **CSS**: Lenguaje de estilos para diseñar la interfaz de usuario y darle estilo a la página web.
+- **JavaScript**: Lenguaje de programación utilizado para la interactividad en el lado del cliente.
 
 ## Instalación
 
