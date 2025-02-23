@@ -3,8 +3,8 @@
 Este es un proyecto de una API RESTful para gestionar productos, desarrollada con **Node.js**, **Express.js** y **MySQL**. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre productos. Esta API proporciona los siguientes endpoints:
 
 - `GET` para obtener productos 
-[Get](https://inventario-production-fa75.up.railway.app/api/productos)
-- `POST` para crear un nuevo producto
+ [GET](https://inventario-production-fa75.up.railway.app/api/productos)
+- `POST` para crear un nuevo producto `https://inventario-production-fa75.up.railway.app/api/productos`
 - `PUT` para actualizar un producto existente
 - `DELETE` para eliminar un producto
 
