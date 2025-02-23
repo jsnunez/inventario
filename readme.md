@@ -1,4 +1,6 @@
-# API de Inventario para una ferreteria - Node.js, Express, MySQL
+# API y pagina para el control de Inventario para una ferreteria - Node.js, Express, MySQL
+
+[pagina principal](https://inventario-production-fa75.up.railway.app/)
 
 Este es un proyecto de una API RESTful para gestionar productos, desarrollada con **Node.js**, **Express.js** y **MySQL**. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre productos. Esta API proporciona los siguientes endpoints:
 
