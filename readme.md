@@ -30,6 +30,9 @@ Este es un proyecto de una API RESTful para gestionar productos en una ferreter�
  
 ![image](https://github.com/user-attachments/assets/b8f7b17c-de15-4a68-a38c-fbf9990110a6)
 
+ **Eliminar producto**
+ 
+![image](https://github.com/user-attachments/assets/de6698c3-f360-433a-9b1d-1aa022a9f5cc)
 
 ### Despliegue
 - **Railway**: Plataforma de despliegue para aplicaciones y bases de datos. El proyecto está desplegado en Railway, lo que proporciona una infraestructura sencilla y accesible para que la API y la base de datos estén disponibles de manera remota.
