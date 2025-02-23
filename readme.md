@@ -23,6 +23,8 @@ nota: {id} se debe cambiar por el numero del producto
 
 - Tener **Node.js** y **npm** instalados en tu sistema.
 - Tener un servidor de base de datos **MySQL** en funcionamiento.
+
+en el archivo database.js se puede modificar para crear una base de datos local
   
 Si no tienes Node.js y npm instalados, puedes descargarlos desde [aquí](https://nodejs.org).
 
