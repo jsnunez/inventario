@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería - Inventario</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos para la ventana modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            display: flex;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #addProveedorBtn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #addProveedorBtn:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilos para la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilos para los botones de paginación */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #pagination button {
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #pagination button:hover {
+            background-color: #45a049;
+        }
+
+        #pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Estilos para el selector de productos por página */
+        #itemsPerPage {
+            margin: 10px;
+        }
+
+        #filterForm{
+            display: flex;
+            justify-content: space-between;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    h1,h2{
+        text-align: center;
+    }
+    #mostrar{
+        display: flex
+;flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    }
+    #opciones{
+        display: flex
+;
+    align-items: center;
+    justify-content: space-evenly;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Inventario de la Ferretería</h1>
+ 
+    
+    <h2>Filtrar Productos</h2>
+    <form id="filterForm">
+        <label for="filterNombre">Nombre:</label>
+        <input type="text" id="filterNombre" placeholder="Filtrar por nombre">
+    
+        <label for="filterReferencia">Referencia:</label>
+        <input type="text" id="filterReferencia" placeholder="Filtrar por referencia">
+    
+        <label for="filterCodigoBarras">Código de Barras:</label>
+        <input type="text" id="filterCodigoBarras" placeholder="Filtrar por código de barras">
+    
+    </form>
+</div>
+    <!-- Selector de productos por página -->
+     <!-- <div id="opciones">
+        <div id="mostrar">
+    <label for="itemsPerPage">Mostrar: </label>
+    <select id="itemsPerPage">
+        <option value="5">5 Artículos</option>
+        <option value="10">10 Artículos</option>
+        <option value="20">20 Artículos</option>
+        <option value="30">30 Artículos</option>
+        <option value="40">40 Artículos</option>
+        <option value="50">50 Artículos</option>
+        <option value="10000">10000 Artículos</option>
+
+    </select> -->
+</div>
+    <button id="openAddModalBtn">Agregar Nuevo Artículo</button>
+</div>
+<h2>Lista de Productos</h2>
+  
+    <table id="productosTable">
+        <thead>
+            <tr>
+                <th>Codigo barras</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio costo</th>
+                <th>Precio Venta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenarán los productos dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+
+    
+    <!-- Controles de paginación -->
+    <div id="pagination">
+        <button id="prevPage" disabled>Anterior</button>
+        <span id="pageNumber">Página 1</span>
+        <button id="nextPage">Siguiente</button>
+    </div>
+
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddModal">&times;</span>
+            <h2>Agregar Nuevo Producto</h2>
+            <form id="nuevoArticuloForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="codigoBarras">Código de Barras:</label>
+                <input type="text" id="codigoBarras" name="codigoBarras" required>
+
+                <label for="referencia">Referencia:</label>
+                <input type="text" id="referencia" name="referencia" required>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" required>
+
+                <label for="precioCosto">Precio Costo:</label>
+                <input type="number" id="precioCosto" name="precioCosto" required>
+
+                <label for="precioVentaDetal">Precio Venta Detal:</label>
+                <input type="number" id="precioVentaDetal" name="precioVentaDetal" required>
+          
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para editar producto -->
+<div id="editProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeEditModal">&times;</span>
+        <h2>Editar Producto</h2>
+        <form id="editarArticuloForm">
+            <input type="hidden" id="editId">
+            <label for="editNombre">Nombre:</label>
+            <input type="text" id="editNombre" required>
+
+            <label for="editCodigoBarras">Código de Barras:</label>
+            <input type="text" id="editCodigoBarras" required>
+
+            <label for="editReferencia">Referencia:</label>
+            <input type="text" id="editReferencia" required>
+
+            <label for="editCantidad">Cantidad:</label>
+            <input type="number" id="editCantidad" required>
+
+            <label for="editPrecioCosto">Precio Costo:</label>
+            <input type="double" id="editPrecioCosto" required>
+
+            <label for="editPrecioVentaDetal">Precio Venta Detal:</label>
+            <input type="number" id="editPrecioVentaDetal" step="any" required>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+
+    <script>
+            const apiUrl = 'https://inventario-production-fa75.up.railway.app/api/productos';
+
+       let productos = []; // Almacenar los productos
+let productosFiltrados = []; // Almacenar los productos filtrados
+let productosPorPagina = 10; // Número de productos por página inicial
+let paginaActual = 1; // Página inicial
+const addProductModal = document.getElementById('addProductModal');
+        const openAddModalBtn = document.getElementById('openAddModalBtn');
+        const closeAddModal = document.getElementById('closeAddModal');
+
+        openAddModalBtn.onclick = () => addProductModal.style.display = 'block';
+        closeAddModal.onclick = () => addProductModal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === addProductModal) addProductModal.style.display = 'none'; };
+
+// Función para obtener los productos de la API
+async function getProductos() {
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        productos = data; // Almacenar los productos obtenidos
+        productosFiltrados = productos; // Inicialmente, los productos filtrados son todos los productos
+        mostrarProductos(); // Mostrar productos después de obtenerlos
+    } catch (error) {
+        console.error('Error al obtener los productos:', error);
+    }
+}
+
+// Función para mostrar los productos en la tabla
+function mostrarProductos() {
+    const productosTable = document.getElementById('productosTable').getElementsByTagName('tbody')[0];
+    productosTable.innerHTML = ''; // Limpiar la tabla
+
+    // Calcular los índices de los productos que deben mostrarse en la página actual
+    const inicio = (paginaActual - 1) * productosPorPagina;
+    const fin = inicio + productosPorPagina;
+    const productosPagina = productosFiltrados.slice(inicio, fin);
+
+    // Agregar los productos filtrados a la tabla
+    productosPagina.forEach(producto => {
+        const row = productosTable.insertRow();
+        row.innerHTML = `
+                        <td>${producto.codigo_barras}</td>
+            <td>${producto.nombre}</td>
+            <td>${producto.cantidad}</td>
+            <td>${producto.precio_costo}</td>           
+            <td>${producto.precio_venta_detal}</td>
+
+            <td>
+            <button onclick='editarProducto(${JSON.stringify(producto)})'>Editar</button>
+            <button onclick='eliminarProducto(${producto.id})'>Eliminar</button>
+          </td>
+        `;
+    });
+
+    // Actualizar el número de página
+    document.getElementById('pageNumber').textContent = `Página ${paginaActual}`;
+
+    // Habilitar/deshabilitar los botones de paginación
+    document.getElementById('prevPage').disabled = paginaActual === 1;
+    document.getElementById('nextPage').disabled = paginaActual * productosPorPagina >= productosFiltrados.length;
+}
+
+// Función para manejar el botón "Anterior"
+document.getElementById('prevPage').onclick = function () {
+    if (paginaActual > 1) {
+        paginaActual--;
+        mostrarProductos();
+};}
+
+// Función para manejar el botón "Siguiente"
+document.getElementById('nextPage').onclick = function () {
+    if (paginaActual * productosPorPagina < productosFiltrados.length) {
+        paginaActual++;
+        mostrarProductos();
+    }
+};
+
+// Filtrar productos en tiempo real a medida que el usuario escribe
+document.getElementById("filterNombre").addEventListener("input", filtrarProductos);
+document.getElementById("filterReferencia").addEventListener("input", filtrarProductos);
+document.getElementById("filterCodigoBarras").addEventListener("input", filtrarProductos);
+
+// Función que se ejecuta al escribir en los filtros
+function filtrarProductos() {
+    const nombreFilter = document.getElementById("filterNombre").value.toLowerCase();
+    const referenciaFilter = document.getElementById("filterReferencia").value.toLowerCase();
+    const codigoBarrasFilter = document.getElementById("filterCodigoBarras").value.toLowerCase();
+
+    // Filtrar productos solo si hay un valor en el filtro
+    productosFiltrados = productos.filter(producto => {
+        const matchNombre = nombreFilter ? producto.nombre.toLowerCase().includes(nombreFilter) : true;
+        const matchReferencia = referenciaFilter ? producto.referencia.toLowerCase().includes(referenciaFilter) : true;
+        const matchCodigoBarras = codigoBarrasFilter ? producto.codigo_barras.toString().includes(codigoBarrasFilter) : true;
+
+        return matchNombre && matchReferencia && matchCodigoBarras;
+    });
+
+    // Reiniciar a la primera página después de aplicar los filtros
+    paginaActual = 1;
+
+    // Mostrar los productos filtrados
+    mostrarProductos();
+}
+
+
+
+// Filtrar productos al cambiar los filtros
+document.getElementById("filterForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+    paginaActual = 1; // Resetear la página a la primera página
+    mostrarProductos(); // Mostrar los productos con los filtros aplicados
+});
+
+// Función para agregar un nuevo artículo
+document.getElementById("nuevoArticuloForm").addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevenir el envío del formulario
+    
+    const nombre = document.getElementById("nombre").value;
+    const codigo_barras = document.getElementById("codigoBarras").value;
+    const referencia = document.getElementById("referencia").value;
+    const cantidad = document.getElementById("cantidad").value;
+    const precio_costo = document.getElementById("precioCosto").value;
+    const precio_venta_detal = document.getElementById("precioVentaDetal").value;
+    const nuevoArticulo = {
+        nombre,
+        codigo_barras,
+        referencia,
+        cantidad,
+        precio_costo,
+        precio_venta_detal
+    };
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoArticulo)
+        });
+
+        if (response.ok) {
+            alert('Artículo agregado con éxito');
+            location.reload(); // Recargar la página después de agregar el artículo
+        } else {
+            alert('Error al agregar el artículo');
+        }
+    } catch (error) {
+        console.error('Error al agregar el artículo:', error);
+    }
+});
+const eliminarProducto = async (id) => {
+      if (confirm('¿Seguro que deseas eliminar este producto?')) {
+        await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+        
+        location.reload(); // Recargar la página después de eliminar
+        
+      }
+  
+      
+    };
+
+    const editProductModal = document.getElementById('editProductModal');
+const closeEditModal = document.getElementById('closeEditModal');
+
+closeEditModal.onclick = () => editProductModal.style.display = 'none';
+window.onclick = (e) => { if (e.target === editProductModal) editProductModal.style.display = 'none'; };
+
+// Función para abrir el modal de edición y rellenar campos
+function editarProducto(producto) {
+    document.getElementById('editId').value = producto.id;
+    document.getElementById('editNombre').value = producto.nombre;
+    document.getElementById('editCodigoBarras').value = producto.codigo_barras;
+    document.getElementById('editReferencia').value = producto.referencia;
+    document.getElementById('editCantidad').value = producto.cantidad;
+    document.getElementById('editPrecioCosto').value = producto.precio_costo;
+    document.getElementById('editPrecioVentaDetal').value = producto.precio_venta_detal;
+
+    editProductModal.style.display = 'block';
+}
+
+// Manejar envío del formulario de edición
+document.getElementById('editarArticuloForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const id = document.getElementById('editId').value;
+    const productoEditado = {
+        nombre: document.getElementById('editNombre').value,
+        codigo_barras: document.getElementById('editCodigoBarras').value,
+        referencia: document.getElementById('editReferencia').value,
+        cantidad: document.getElementById('editCantidad').value,
+        precio_costo: document.getElementById('editPrecioCosto').value,
+        precio_venta_detal: document.getElementById('editPrecioVentaDetal').value
+    };
+
+    try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productoEditado)
+        });
+
+        if (response.ok) {
+            alert('Producto actualizado con éxito');
+            editProductModal.style.display = 'none';
+            getProductos();
+        } else {
+            alert('Error al actualizar el producto');
+        }
+    } catch (error) {
+        console.error('Error al actualizar:', error);
+    }
+});
+// Llamar a la función para obtener los productos cuando se carga la página
+window.onload = getProductos;
+
+    </script>
+</body>
+
+</html>
