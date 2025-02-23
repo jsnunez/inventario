@@ -33,5 +33,5 @@ Si no tienes Node.js y npm instalados, puedes descargarlos desde [aquí](https:/
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/api-productos.git
+   git clone https://github.com/jsnunez/api-productos.git
    cd api-productos
