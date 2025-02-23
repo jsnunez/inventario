@@ -16,7 +16,7 @@ app.use(cors({
 app.use('/api', productoRoutes);
 
 sequelize.sync().then(() => {
-  app.listen(35017, () => {
+  app.listen(3000, () => {
     console.log('Servidor ejecutándose en http://localhost:3000');
   });
 }).catch(err => console.error('Error al sincronizar la base de datos:', err));
