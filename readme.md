@@ -18,6 +18,10 @@ Este es un proyecto de una API RESTful para gestionar productos en una ferreter�
 - **CSS**: Lenguaje de estilos para diseñar la interfaz de usuario y darle estilo a la página web.
 - **JavaScript**: Lenguaje de programación utilizado para la interactividad en el lado del cliente.
 
+### Despliegue
+- **Railway**: Plataforma de despliegue para aplicaciones y bases de datos. El proyecto está desplegado en Railway, lo que proporciona una infraestructura sencilla y accesible para que la API y la base de datos estén disponibles de manera remota.
+
+
 ### Herramientas opcionales
 
 - **Insomnia/Postman**: Herramientas para probar las peticiones de la API.
