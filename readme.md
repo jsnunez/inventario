@@ -1,8 +1,9 @@
-# API de Productos - Node.js, Express, MySQL
+# API de Inventario para una ferreteria - Node.js, Express, MySQL
 
 Este es un proyecto de una API RESTful para gestionar productos, desarrollada con **Node.js**, **Express.js** y **MySQL**. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre productos. Esta API proporciona los siguientes endpoints:
 
-- `GET` para obtener productos
+- `GET` para obtener productos 
+[Get](https://inventario-production-fa75.up.railway.app/api/productos)
 - `POST` para crear un nuevo producto
 - `PUT` para actualizar un producto existente
 - `DELETE` para eliminar un producto
@@ -12,7 +13,7 @@ Este es un proyecto de una API RESTful para gestionar productos, desarrollada co
 - **Node.js**: Entorno de ejecución para JavaScript del lado del servidor.
 - **Express.js**: Framework para Node.js que facilita la creación de aplicaciones web y APIs.
 - **MySQL**: Sistema de gestión de bases de datos relacional para almacenar los datos.
-- **Postman** (opcional): Herramienta para probar las peticiones de la API.
+- **Insomnia** (opcional): Herramienta para probar las peticiones de la API.
 
 ## Instalación
 
