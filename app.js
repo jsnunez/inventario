@@ -10,12 +10,11 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta para servir index.html cuando se accede a la raíz '/'
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 app.use(cors({
-  origin: '*', // Permite todas las conexiones
+  origin: '*', 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

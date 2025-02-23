@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
+// Definimos el modelo Producto con sus respectivos atributos y opciones.
 const Producto = sequelize.define('producto', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   codigo_barras: { type: DataTypes.DOUBLE, allowNull: false },

@@ -1,5 +1,5 @@
 const Producto = require('../models/producto');
-
+// Crear nuevo producto
 const crearProducto = async (req, res) => {
   try {
     const producto = await Producto.create(req.body);
@@ -8,7 +8,7 @@ const crearProducto = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
+// Obtener lista de productos
 const obtenerProductos = async (req, res) => {
   try {
     const productos = await Producto.findAll();
