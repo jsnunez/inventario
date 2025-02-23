@@ -2,6 +2,8 @@
 
 Este es un proyecto de una API RESTful para gestionar productos en una ferretería, desarrollada con **Node.js**, **Express.js** y **MySQL**. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre los productos. Además, se incluye una interfaz de usuario que utiliza **HTML**, **CSS** y **JavaScript** para interactuar con la API.
 
+[Pagina de inicio](https://inventario-production-fa75.up.railway.app/)
+
 ## Tecnologías utilizadas
 
 ### Backend
