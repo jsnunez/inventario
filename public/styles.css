@@ -12,6 +12,7 @@ h1, h2 {
     text-align: center;
     font-size: 2.5em; /* Aumentar tamaño de los títulos */
     margin-bottom: 20px;
+    text-shadow: 1px 1px 0px #000000, 1px 1px 0px #000000, 1px 1px 0px #000000, 1px 1px 0px #000000; /* Bordes negros alrededor del texto */
 }
 
 table {
@@ -23,7 +24,7 @@ table {
 
 table, th, td {
     border: 1px solid #FFD700; /* Borde amarillo */
-    text-align: left;
+    text-align: center;
     padding: 12px;
     transition: all 0.3s ease; /* Transición suave */
 }
@@ -60,6 +61,14 @@ input, select {
     border: 1px solid #FFD700;
     color: #333333;
     border-radius: 5px;
+    text-align: center;
+}
+
+#editarArticuloForm {
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+    width: 80%;
 }
 
 button {
@@ -104,7 +113,7 @@ button:active {
     padding: 20px;
     border: 1px solid #FFD700; /* Borde amarillo */
     width: 80%;
-    max-width: 400px;
+    max-width: auto;
     align-items: center;
     flex-direction: column;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave en la ventana modal */
@@ -173,11 +182,26 @@ button:active {
     margin: 20px 0;
 }
 
+th {
+    text-align: center;
+}
+
+label {
+    text-align: center;
+}
+
 #filterForm {
     display: flex;
-    align-content: flex-start;
-    justify-content: space-evenly;    margin-left: 20px;
+    justify-content: space-evenly;
+    margin-left: 20px;
     margin-right: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se acomoden en líneas nuevas en pantallas pequeñas */
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+#filterForm label, #filterForm select, #filterForm input {
+    width: 45%; /* Se toma el 45% del ancho en pantallas medianas */
+    min-width: 200px; /* Para evitar que los elementos se hagan demasiado pequeños */
 }
 
 #mostrar {
@@ -195,4 +219,19 @@ button:active {
 
 #opcionboton {
     display: flex;
+    justify-content: space-around;
 }
+
+/* Media query para dispositivos pequeños (móviles) */
+@media (max-width: 768px) {
+    #filterForm {
+        flex-direction: column; /* En pantallas pequeñas, los filtros se apilan en una sola columna */
+        align-items: center; /* Centra los elementos */
+    }
+
+    #filterForm label, #filterForm select, #filterForm input {
+        width: 80%; /* Aumentar el ancho de los elementos en pantallas pequeñas */
+        margin-bottom: 10px; /* Añadir espacio entre los elementos */
+    }
+}
+

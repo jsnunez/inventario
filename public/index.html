@@ -41,9 +41,9 @@
   
     <table id="productosTable">
         <thead>
-            <tr>
+            <tr >
                 <th>Codigo barras</th>
-                <th>Nombre</th>
+                <th >Nombre</th>
                 <th>Cantidad</th>
                 <th>Precio costo</th>
                 <th>Precio Venta</th>
@@ -165,9 +165,9 @@ function mostrarProductos() {
         row.innerHTML = `
                         <td>${producto.codigo_barras}</td>
             <td>${producto.nombre}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.precio_costo}</td>           
-            <td>${producto.precio_venta_detal}</td>
+            <td>${producto.cantidad} unid</td>
+            <td>$${producto.precio_costo}</td>           
+            <td>$${producto.precio_venta_detal}</td>
 
             <td id="opcionboton">
             <button onclick='editarProducto(${JSON.stringify(producto)})'>Editar</button>
